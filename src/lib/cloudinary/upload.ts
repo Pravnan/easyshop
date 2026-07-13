@@ -1,15 +1,28 @@
 import { v2 as cloudinary } from "cloudinary";
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
+const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+const apiKey = process.env.CLOUDINARY_API_KEY;
+const apiSecret = process.env.CLOUDINARY_API_SECRET;
+
+const isCloudinaryConfigured = !!(cloudName && apiKey && apiSecret);
+
+if (isCloudinaryConfigured) {
+  cloudinary.config({
+    cloud_name: cloudName,
+    api_key: apiKey,
+    api_secret: apiSecret,
+  });
+}
 
 export async function uploadImage(
   file: File,
   folder: string = "easyshop"
-): Promise<{ url: string; publicId: string }> {
+): Promise<{ url: string; publicId: string } | null> {
+  if (!isCloudinaryConfigured) {
+    console.warn("Cloudinary not configured. Skipping image upload.");
+    return null;
+  }
+
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 

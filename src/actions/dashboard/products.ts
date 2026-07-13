@@ -117,7 +117,9 @@ export async function createProduct(data: ProductInput, images: File[]) {
     }
     try {
       const result = await uploadImage(file, "easyshop/products");
-      uploadedImages.push(result);
+      if (result) {
+        uploadedImages.push(result);
+      }
     } catch {
       console.warn("Image upload failed, skipping. Configure Cloudinary to enable image uploads.");
     }
@@ -192,7 +194,9 @@ export async function updateProduct(
       throw new Error("Images must be less than 5MB");
     }
     const result = await uploadImage(file, "easyshop/products");
-    uploadedImages.push(result);
+    if (result) {
+      uploadedImages.push(result);
+    }
   }
 
   product.name = parsed.data.name;

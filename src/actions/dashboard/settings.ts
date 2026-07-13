@@ -78,11 +78,13 @@ export async function updateLogo(file: File) {
   }
 
   const result = await uploadImage(file, "easyshop/logos");
-  store.logo = result;
-  await store.save();
+  if (result) {
+    store.logo = result;
+    await store.save();
+  }
   revalidatePath("/dashboard/settings");
 
-  return result;
+  return { success: true, uploaded: !!result };
 }
 
 export async function updateBanner(file: File) {
@@ -97,9 +99,11 @@ export async function updateBanner(file: File) {
   }
 
   const result = await uploadImage(file, "easyshop/banners");
-  store.banner = result;
-  await store.save();
+  if (result) {
+    store.banner = result;
+    await store.save();
+  }
   revalidatePath("/dashboard/settings");
 
-  return result;
+  return { success: true, uploaded: !!result };
 }
