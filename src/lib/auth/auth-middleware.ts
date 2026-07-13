@@ -1,7 +1,19 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name: string;
+      email: string;
+      role: "ADMIN" | "SHOP_OWNER";
+      storeId?: string;
+    };
+  }
+}
+
+export const { auth } = NextAuth({
   providers: [
     CredentialsProvider({
       id: "credentials",
