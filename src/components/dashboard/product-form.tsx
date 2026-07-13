@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/card";
 import { X, Plus, Upload } from "lucide-react";
 import { toast } from "sonner";
+import { compressImage } from "@/lib/client-image";
 
 interface CategoryItem {
   _id: string;
@@ -100,7 +101,7 @@ export function ProductForm({ categories, product }: ProductFormProps) {
     name: "variantGroups",
   });
 
-  const handleImageUpload = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files ?? []);
     const total = imagePreviews.length + files.length;
     if (total > 2) {
@@ -112,15 +113,12 @@ export function ProductForm({ categories, product }: ProductFormProps) {
         toast.error("Images must be JPEG, PNG, or WebP");
         return;
       }
-      if (file.size > 5 * 1024 * 1024) {
-        toast.error("Images must be less than 5MB");
-        return;
-      }
     }
-    setNewImages((prev) => [...prev, ...files]);
+    const compressed = await Promise.all(files.map((f) => compressImage(f, 800)));
+    setNewImages((prev) => [...prev, ...compressed]);
     setImagePreviews((prev) => [
       ...prev,
-      ...files.map((f) => URL.createObjectURL(f)),
+      ...compressed.map((f) => URL.createObjectURL(f)),
     ]);
   }, [imagePreviews.length]);
 

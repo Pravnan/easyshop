@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Upload, X } from "lucide-react";
+import { compressImage } from "@/lib/client-image";
 
 interface SettingsData {
   _id: string;
@@ -166,7 +167,13 @@ export function SettingsForm({ settings }: { settings: SettingsData }) {
                   type="file"
                   accept="image/jpeg,image/png,image/webp"
                   className="hidden"
-                  onChange={(e) => setLogoFile(e.target.files?.[0] ?? null)}
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const compressed = await compressImage(file);
+                      setLogoFile(compressed);
+                    }
+                  }}
                 />
               </label>
             </div>
@@ -204,7 +211,13 @@ export function SettingsForm({ settings }: { settings: SettingsData }) {
                   type="file"
                   accept="image/jpeg,image/png,image/webp"
                   className="hidden"
-                  onChange={(e) => setBannerFile(e.target.files?.[0] ?? null)}
+                  onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      const compressed = await compressImage(file, 1200);
+                      setBannerFile(compressed);
+                    }
+                  }}
                 />
               </label>
             </div>
