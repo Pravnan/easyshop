@@ -77,6 +77,21 @@ export async function resetShopOwnerPassword(storeId: string, newPassword: strin
   return { success: true, ownerName: user.name, ownerEmail: user.email };
 }
 
+export async function markStoreAsPaid(storeId: string) {
+  await requireAdmin();
+  await connectDB();
+
+  const store = await Store.findById(storeId);
+  if (!store) throw new Error("Store not found");
+
+  store.paidAt = new Date();
+  store.paymentPending = true;
+  store.isActive = true;
+  await store.save();
+
+  return { success: true, paidAt: store.paidAt.toISOString() };
+}
+
 export async function getStores(search?: string, status?: string) {
   await requireAdmin();
   await connectDB();
@@ -130,6 +145,9 @@ export async function getStoreById(storeId: string) {
     email: store.email,
     address: store.address,
     isActive: store.isActive,
+    trialEndsAt: store.trialEndsAt?.toISOString(),
+    paidAt: store.paidAt?.toISOString(),
+    paymentPending: store.paymentPending,
     createdAt: store.createdAt?.toISOString() ?? "",
     owner: {
       name: (store.ownerId as unknown as { name: string })?.name ?? "",

@@ -9,9 +9,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, CreditCard } from "lucide-react";
 import { StoreStatusToggle } from "@/components/admin/store-status-toggle";
 import { ResetPasswordDialog } from "@/components/admin/reset-password-dialog";
+import { MarkAsPaidButton } from "@/components/admin/mark-as-paid-button";
 
 interface Props {
   params: Promise<{ storeId: string }>;
@@ -115,6 +116,12 @@ export default async function StoreDetailPage({ params }: Props) {
         <CardContent className="space-y-3">
           <StoreStatusToggle storeId={storeId} isActive={store.isActive} />
           <ResetPasswordDialog storeId={storeId} storeName={store.name} />
+          <MarkAsPaidButton
+            storeId={storeId}
+            paidAt={store.paidAt}
+            paymentPending={store.paymentPending}
+            trialEndsAt={store.trialEndsAt}
+          />
         </CardContent>
       </Card>
     </div>

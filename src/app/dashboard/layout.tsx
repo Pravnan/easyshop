@@ -8,10 +8,13 @@ import {
   Settings,
   LogOut,
   Store,
+  Palette,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { connectDB } from "@/lib/database/mongoose";
 import { Store as StoreModel } from "@/models/Store";
+import { checkAndDisableExpiredStores, getStoreTrialInfo } from "@/actions/dashboard/trial";
+import { TrialBanner } from "@/components/dashboard/trial-banner";
 
 export default async function DashboardLayout({
   children,
@@ -22,8 +25,17 @@ export default async function DashboardLayout({
   await connectDB();
   const store = await StoreModel.findById(session.user.storeId).lean();
 
+  // Check and disable expired trials
+  await checkAndDisableExpiredStores();
+  const trialInfo = await getStoreTrialInfo(session.user.storeId!);
+
   return (
     <div className="flex min-h-screen">
+      <TrialBanner
+        trialEndsAt={trialInfo?.trialEndsAt}
+        paidAt={trialInfo?.paidAt}
+        isActive={trialInfo?.isActive ?? true}
+      />
       <aside className="hidden w-64 flex-col border-r bg-white lg:flex">
         <div className="border-b p-6">
           <Link href="/dashboard" className="text-xl font-bold text-[#1565C0]">
@@ -59,6 +71,13 @@ export default async function DashboardLayout({
           >
             <Tags className="h-4 w-4" />
             Categories
+          </Link>
+          <Link
+            href="/dashboard/theme"
+            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-[#EAF4FF] hover:text-[#1565C0]"
+          >
+            <Palette className="h-4 w-4" />
+            Theme
           </Link>
           <Link
             href="/dashboard/settings"

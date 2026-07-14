@@ -20,6 +20,10 @@ export interface IStore extends Document {
   facebookUrl?: string;
   instagramUrl?: string;
   isActive: boolean;
+  trialEndsAt?: Date;
+  paidAt?: Date;
+  paymentPending?: boolean;
+  theme: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -62,6 +66,10 @@ const StoreSchema = new Schema<IStore>(
     facebookUrl: { type: String, trim: true, maxlength: 500 },
     instagramUrl: { type: String, trim: true, maxlength: 500 },
     isActive: { type: Boolean, default: true },
+    trialEndsAt: { type: Date },
+    paidAt: { type: Date },
+    paymentPending: { type: Boolean },
+    theme: { type: String, default: "ocean-blue" },
   },
   { timestamps: true }
 );

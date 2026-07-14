@@ -9,6 +9,12 @@ export default function LoginPage() {
           <p className="mt-2 text-muted-foreground">Sign in to your account</p>
         </div>
         <LoginForm />
+        <p className="mt-4 text-center text-sm text-muted-foreground">
+          Don&apos;t have a store?{" "}
+          <a href="/register" className="text-[#1565C0] hover:underline font-medium">
+            Create one for free
+          </a>
+        </p>
       </div>
     </div>
   );

@@ -100,6 +100,19 @@ export const resetPasswordSchema = z.object({
   newPassword: z.string().min(6, "Password must be at least 6 characters").max(100),
 });
 
+export const registerSchema = z.object({
+  ownerName: z.string().min(1, "Owner name is required").max(100),
+  email: z.string().email("Invalid email address").max(255),
+  password: z.string().min(6, "Password must be at least 6 characters").max(100),
+  storeName: z.string().min(1, "Store name is required").max(100),
+  storeSlug: z
+    .string()
+    .min(1, "Store slug is required")
+    .max(100)
+    .regex(/^[a-z0-9-]+$/, "Slug can only contain lowercase letters, numbers, and hyphens"),
+  whatsappNumber: z.string().min(1, "WhatsApp number is required").max(20),
+});
+
 export type LoginInput = z.infer<typeof loginSchema>;
 export type CreateStoreInput = z.infer<typeof createStoreSchema>;
 export type StoreSettingsInput = z.infer<typeof storeSettingsSchema>;
