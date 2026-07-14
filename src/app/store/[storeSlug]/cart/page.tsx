@@ -41,7 +41,7 @@ export default function CartPage() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-2 rounded-2xl bg-[#1565C0] px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#1565C0]/20 hover:bg-[#0D47A1] transition-colors"
+                className="inline-flex items-center gap-2 rounded-2xl bg-[var(--primary)] px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-[var(--primary)]/20 hover:bg-[var(--primary-dark)] transition-colors"
               >
                 <ArrowLeft className="h-4 w-4" />
                 Continue Shopping
@@ -59,7 +59,7 @@ export default function CartPage() {
         {/* Header */}
         <div className="mb-8 flex items-center justify-between">
           <div>
-            <Link href={`/store/${storeSlug}`} className="mb-2 inline-flex items-center gap-1.5 text-sm text-[#1565C0] hover:underline">
+            <Link href={`/store/${storeSlug}`} className="mb-2 inline-flex items-center gap-1.5 text-sm text-[var(--primary)] hover:underline">
               <ArrowLeft className="h-4 w-4" />
               Continue Shopping
             </Link>
@@ -80,10 +80,10 @@ export default function CartPage() {
         {/* Shipping progress */}
         <div className="mb-8 rounded-2xl bg-white p-5 shadow-sm border border-gray-100">
           <div className="flex items-center gap-3 mb-3">
-            <Truck className="h-5 w-5 text-[#1565C0]" />
+            <Truck className="h-5 w-5 text-[var(--primary)]" />
             {remainingForFree > 0 ? (
               <p className="text-sm text-gray-600">
-                Add <span className="font-bold text-[#1565C0]">Rs. {remainingForFree.toLocaleString("en-LK")}</span> more for <span className="font-semibold">free shipping</span>
+                Add <span className="font-bold text-[var(--primary)]">Rs. {remainingForFree.toLocaleString("en-LK")}</span> more for <span className="font-semibold">free shipping</span>
               </p>
             ) : (
               <p className="text-sm font-medium text-green-600">You qualify for free shipping! 🎉</p>
@@ -124,7 +124,7 @@ export default function CartPage() {
                         <div>
                           <div className="flex items-start justify-between">
                             <h3 className="font-semibold text-gray-900">{item.name}</h3>
-                            <span className="text-lg font-bold text-[#1565C0]">
+                            <span className="text-lg font-bold text-[var(--primary)]">
                               Rs. {((item.offerPrice ?? item.regularPrice) * item.quantity).toLocaleString("en-LK")}
                             </span>
                           </div>
@@ -198,7 +198,7 @@ export default function CartPage() {
                 <div className="border-t pt-3">
                   <div className="flex justify-between text-base">
                     <span className="font-bold text-gray-900">Total</span>
-                    <span className="text-xl font-bold text-[#1565C0]">
+                    <span className="text-xl font-bold text-[var(--primary)]">
                       Rs. {(couponApplied ? total * 0.9 : total).toLocaleString("en-LK")}
                     </span>
                   </div>
@@ -244,7 +244,7 @@ export default function CartPage() {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-[#1565C0] py-3.5 text-sm font-semibold text-white shadow-lg shadow-[#1565C0]/20 hover:bg-[#0D47A1] transition-colors"
+                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-2xl bg-[var(--primary)] py-3.5 text-sm font-semibold text-white shadow-lg shadow-[var(--primary)]/20 hover:bg-[var(--primary-dark)] transition-colors"
                 >
                   Proceed to Checkout
                 </motion.button>

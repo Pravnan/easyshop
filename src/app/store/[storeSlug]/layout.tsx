@@ -14,17 +14,22 @@ export default async function StoreLayout({ children, params }: Props) {
   const store = await Store.findOne({ slug: storeSlug }).lean();
   const theme = getTheme(store?.theme ?? "ocean-blue");
 
-  const cssVars = Object.entries(theme.colors)
-    .map(([key, val]) => `--theme-${key}: ${val};`)
-    .join("");
+  const cssVars = `
+    --primary: ${theme.colors.primary};
+    --primary-dark: ${theme.colors["primary-dark"]};
+    --primary-light: ${theme.colors["primary-light"]};
+    --primary-foreground: ${theme.colors["primary-foreground"]};
+    --secondary: ${theme.colors.secondary};
+    --secondary-foreground: ${theme.colors["secondary-foreground"]};
+    --accent: ${theme.colors["primary-light"]};
+    --accent-foreground: ${theme.colors["primary-dark"]};
+    --hero-from: ${theme.colors["hero-from"]};
+    --hero-to: ${theme.colors["hero-to"]};
+  `;
 
   return (
-    <div
-      style={
-        { "--theme-primary": theme.colors.primary } as React.CSSProperties
-      }
-    >
-      <style>{`:root { ${cssVars} }`}</style>
+    <div className="storefront" style={{ "--primary": theme.colors.primary } as React.CSSProperties}>
+      <style>{`.storefront { ${cssVars} }`}</style>
       {children}
     </div>
   );

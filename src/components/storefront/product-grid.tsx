@@ -99,7 +99,7 @@ export function ProductGrid({ products, storeSlug }: ProductGridProps) {
             </Link>
 
             <Link href={`/store/${storeSlug}/product/${product.slug}`}>
-              <h3 className="mb-1 font-medium text-gray-900 hover:text-[#1565C0] transition-colors line-clamp-1">
+              <h3 className="mb-1 font-medium text-gray-900 hover:text-[var(--primary)] transition-colors line-clamp-1">
                 {product.name}
               </h3>
             </Link>
@@ -111,7 +111,7 @@ export function ProductGrid({ products, storeSlug }: ProductGridProps) {
             </div>
 
             <div className="mb-3 flex items-center gap-2">
-              <span className="text-lg font-bold text-[#1565C0]">
+              <span className="text-lg font-bold text-[var(--primary)]">
                 Rs. {price.toLocaleString("en-LK")}
               </span>
               {product.offerPrice && (
@@ -126,7 +126,7 @@ export function ProductGrid({ products, storeSlug }: ProductGridProps) {
               whileTap={{ scale: 0.98 }}
               onClick={() => handleQuickAdd(product)}
               disabled={!product.inStock}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1565C0] py-2.5 text-sm font-medium text-white hover:bg-[#0D47A1] transition-colors disabled:opacity-50"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-[var(--primary)] py-2.5 text-sm font-medium text-white hover:bg-[var(--primary-dark)] transition-colors disabled:opacity-50"
             >
               <ShoppingCart className="h-4 w-4" />
               {product.inStock ? "Add to Cart" : "Sold Out"}

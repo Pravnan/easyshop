@@ -77,7 +77,7 @@ export function ProductDetail({ product, storeSlug, relatedProducts }: ProductDe
     <div className="min-h-screen bg-white">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <nav className="mb-6 flex items-center gap-2 text-sm text-gray-400">
-          <a href={`/store/${storeSlug}`} className="hover:text-[#1565C0] transition-colors">Home</a>
+          <a href={`/store/${storeSlug}`} className="hover:text-[var(--primary)] transition-colors">Home</a>
           <span>/</span>
           <span className="text-gray-600">{product.name}</span>
         </nav>
@@ -130,7 +130,7 @@ export function ProductDetail({ product, storeSlug, relatedProducts }: ProductDe
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedImage(i)}
                     className={`h-20 w-20 overflow-hidden rounded-xl border-2 transition-all ${
-                      selectedImage === i ? "border-[#1565C0] ring-2 ring-[#1565C0]/20 shadow-md" : "border-gray-200 hover:border-gray-300"
+                      selectedImage === i ? "border-[var(--primary)] ring-2 ring-[var(--primary)]/20 shadow-md" : "border-gray-200 hover:border-gray-300"
                     }`}
                   >
                     <img src={img.url} alt="" className="h-full w-full object-cover" />
@@ -163,7 +163,7 @@ export function ProductDetail({ product, storeSlug, relatedProducts }: ProductDe
 
             {/* Price */}
             <div className="mt-4 flex items-center gap-3">
-              <span className="text-4xl font-bold text-[#1565C0]">
+              <span className="text-4xl font-bold text-[var(--primary)]">
                 Rs. {currentPrice.toLocaleString("en-LK")}
               </span>
               {product.offerPrice && (
@@ -193,7 +193,7 @@ export function ProductDetail({ product, storeSlug, relatedProducts }: ProductDe
                       onClick={() => setSelectedColor(color)}
                       className={`rounded-xl border-2 px-5 py-2.5 text-sm font-medium transition-all ${
                         selectedColor === color
-                          ? "border-[#1565C0] bg-[#EAF4FF] text-[#1565C0] shadow-sm"
+                          ? "border-[var(--primary)] bg-[var(--primary-light)] text-[var(--primary)] shadow-sm"
                           : "border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:shadow-sm"
                       }`}
                     >
@@ -219,7 +219,7 @@ export function ProductDetail({ product, storeSlug, relatedProducts }: ProductDe
                       onClick={() => setSelectedSize(size)}
                       className={`rounded-xl border-2 px-5 py-2.5 text-sm font-medium transition-all ${
                         selectedSize === size
-                          ? "border-[#1565C0] bg-[#EAF4FF] text-[#1565C0] shadow-sm"
+                          ? "border-[var(--primary)] bg-[var(--primary-light)] text-[var(--primary)] shadow-sm"
                           : "border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:shadow-sm"
                       }`}
                     >
@@ -245,7 +245,7 @@ export function ProductDetail({ product, storeSlug, relatedProducts }: ProductDe
                       onClick={() => setSelectedVariants((prev) => ({ ...prev, [group.name]: option }))}
                       className={`rounded-xl border-2 px-5 py-2.5 text-sm font-medium transition-all ${
                         selectedVariants[group.name] === option
-                          ? "border-[#1565C0] bg-[#EAF4FF] text-[#1565C0] shadow-sm"
+                          ? "border-[var(--primary)] bg-[var(--primary-light)] text-[var(--primary)] shadow-sm"
                           : "border-gray-200 bg-white text-gray-700 hover:border-gray-300 hover:shadow-sm"
                       }`}
                     >
@@ -292,7 +292,7 @@ export function ProductDetail({ product, storeSlug, relatedProducts }: ProductDe
                 whileTap="tap"
                 onClick={handleAddToCart}
                 disabled={!product.inStock}
-                className="flex flex-1 items-center justify-center gap-3 rounded-2xl bg-[#1565C0] py-4 text-base font-semibold text-white shadow-lg shadow-[#1565C0]/20 hover:bg-[#0D47A1] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex flex-1 items-center justify-center gap-3 rounded-2xl bg-[var(--primary)] py-4 text-base font-semibold text-white shadow-lg shadow-[var(--primary)]/20 hover:bg-[var(--primary-dark)] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <ShoppingCart className="h-5 w-5" />
                 {product.inStock ? "Add to Cart" : "Sold Out"}
@@ -317,8 +317,8 @@ export function ProductDetail({ product, storeSlug, relatedProducts }: ProductDe
                 { icon: Shield, label: "Secure Checkout", sub: "SSL encrypted payment" },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-2 text-sm">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#EAF4FF]">
-                    <item.icon className="h-4 w-4 text-[#1565C0]" />
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--primary-light)]">
+                    <item.icon className="h-4 w-4 text-[var(--primary)]" />
                   </div>
                   <div>
                     <p className="font-medium text-gray-900 text-xs">{item.label}</p>
@@ -374,8 +374,8 @@ export function ProductDetail({ product, storeSlug, relatedProducts }: ProductDe
                       className="h-full w-full object-cover"
                     />
                   </div>
-                  <h3 className="font-medium text-gray-900 group-hover:text-[#1565C0] transition-colors">{rp.name}</h3>
-                  <p className="text-lg font-bold text-[#1565C0]">
+                  <h3 className="font-medium text-gray-900 group-hover:text-[var(--primary)] transition-colors">{rp.name}</h3>
+                  <p className="text-lg font-bold text-[var(--primary)]">
                     Rs. {(rp.offerPrice ?? rp.regularPrice).toLocaleString("en-LK")}
                   </p>
                 </a>

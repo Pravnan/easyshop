@@ -47,7 +47,7 @@ export function FeaturedCategories({ categories, storeSlug }: FeaturedCategories
             >
               <Link
                 href={`/store/${storeSlug}?category=${cat._id}`}
-                className="group relative block overflow-hidden rounded-2xl bg-gradient-to-br from-[#1565C0] to-[#0D47A1] p-8"
+                className="group relative block overflow-hidden rounded-2xl p-8" style={{background: "linear-gradient(135deg, var(--primary), var(--primary-dark))"}}
               >
                 <div className="relative z-10">
                   <h3 className="text-xl font-bold text-white">{cat.name}</h3>

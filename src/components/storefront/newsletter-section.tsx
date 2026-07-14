@@ -20,7 +20,7 @@ export function NewsletterSection() {
   }
 
   return (
-    <section className="py-20 bg-gradient-to-br from-[#0D47A1] to-[#1565C0]">
+    <section className="py-20" style={{background: "linear-gradient(135deg, var(--hero-from), var(--primary))"}}>
       <div className="mx-auto max-w-xl px-4 text-center sm:px-6">
         <ScrollReveal>
           <Mail className="mx-auto mb-4 h-10 w-10 text-white/60" />
@@ -56,7 +56,7 @@ export function NewsletterSection() {
             <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
               <Button
                 type="submit"
-                className="h-12 rounded-xl bg-white px-6 text-[#0D47A1] font-semibold hover:bg-white/90"
+                className="h-12 rounded-xl bg-white px-6 text-[var(--primary-dark)] font-semibold hover:bg-white/90"
               >
                 Subscribe
               </Button>

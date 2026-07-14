@@ -24,7 +24,7 @@ export function AnnouncementBar() {
   const { icon: Icon, text } = announcements[index];
 
   return (
-    <div className="flex h-10 items-center justify-center bg-[#0D47A1] text-white text-xs sm:text-sm font-medium">
+    <div className="flex h-10 items-center justify-center text-white text-xs sm:text-sm font-medium" style={{backgroundColor: "var(--primary-dark)"}}>
       <AnimatePresence mode="wait">
         <motion.div
           key={index}

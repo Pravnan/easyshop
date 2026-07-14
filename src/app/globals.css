@@ -68,6 +68,11 @@
   --chart-3: #1E88E5;
   --chart-4: #42A5F5;
   --chart-5: #90CAF9;
+  --primary: #1565C0;
+  --primary-dark: #0D47A1;
+  --primary-light: #EAF4FF;
+  --hero-from: #0D47A1;
+  --hero-to: #1E88E5;
   --radius: 0.5rem;
   --sidebar: #FFFFFF;
   --sidebar-foreground: #1F2937;

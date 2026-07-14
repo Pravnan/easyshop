@@ -32,7 +32,7 @@ export function HeroSection({ storeName, storeSlug, bannerUrl, logoUrl }: HeroSe
             className="h-full w-full object-cover"
           />
         ) : (
-          <div className="h-full w-full bg-gradient-to-br from-[#0D47A1] via-[#1565C0] to-[#1E88E5]" />
+          <div className="h-full w-full" style={{background: `linear-gradient(135deg, var(--hero-from), var(--primary), var(--hero-to))`}} />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
       </motion.div>
@@ -59,7 +59,7 @@ export function HeroSection({ storeName, storeSlug, bannerUrl, logoUrl }: HeroSe
             href={`/store/${storeSlug}`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-semibold text-[#0D47A1] shadow-xl hover:bg-white/90 transition-colors"
+            className="inline-flex items-center justify-center rounded-full bg-white px-8 py-4 text-base font-semibold shadow-xl hover:bg-white/90 transition-colors" style={{color: "var(--primary-dark)"}}
           >
             Shop Now
           </motion.a>

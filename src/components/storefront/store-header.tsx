@@ -57,7 +57,7 @@ export function StoreHeader({ store }: StoreHeaderProps) {
                   className="h-9 w-9 rounded-full object-cover"
                 />
               ) : null}
-              <span className="text-xl font-bold tracking-tight text-[#0D47A1]">
+              <span className="text-xl font-bold tracking-tight" style={{color: "var(--primary-dark)"}}>
                 {store.name}
               </span>
             </Link>
@@ -68,7 +68,7 @@ export function StoreHeader({ store }: StoreHeaderProps) {
                 onMouseEnter={() => setMegaMenuOpen(true)}
                 onMouseLeave={() => setMegaMenuOpen(false)}
               >
-                <button className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-[#EAF4FF] hover:text-[#1565C0] transition-colors">
+                <button className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-[var(--primary-light)] hover:text-[var(--primary)] transition-colors">
                   Categories
                   <ChevronDown className={`h-3 w-3 transition-transform ${megaMenuOpen ? "rotate-180" : ""}`} />
                 </button>
@@ -87,14 +87,14 @@ export function StoreHeader({ store }: StoreHeaderProps) {
                           <Link
                             key={cat._id}
                             href={`/store/${store.slug}?category=${cat._id}`}
-                            className="block rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-[#EAF4FF] hover:text-[#1565C0] transition-colors"
+                            className="block rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-[var(--primary-light)] hover:text-[var(--primary)] transition-colors"
                           >
                             {cat.name}
                           </Link>
                         ))}
                         <Link
                           href={`/store/${store.slug}`}
-                          className="block rounded-lg px-3 py-2 text-sm font-medium text-[#1565C0] hover:bg-[#EAF4FF] transition-colors"
+                          className="block rounded-lg px-3 py-2 text-sm font-medium text-[var(--primary)] hover:bg-[var(--primary-light)] transition-colors"
                         >
                           View All
                         </Link>
@@ -105,7 +105,7 @@ export function StoreHeader({ store }: StoreHeaderProps) {
               </div>
               <Link
                 href={`/store/${store.slug}`}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-[#EAF4FF] hover:text-[#1565C0] transition-colors"
+                className="rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-[var(--primary-light)] hover:text-[var(--primary)] transition-colors"
               >
                 New Arrivals
               </Link>
@@ -122,7 +122,7 @@ export function StoreHeader({ store }: StoreHeaderProps) {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="rounded-lg p-2 text-gray-600 hover:bg-[#EAF4FF] hover:text-[#1565C0] transition-colors"
+              className="rounded-lg p-2 text-gray-600 hover:bg-[var(--primary-light)] hover:text-[var(--primary)] transition-colors"
               aria-label="Search"
             >
               <Search className="h-5 w-5" />
@@ -130,7 +130,7 @@ export function StoreHeader({ store }: StoreHeaderProps) {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="hidden sm:block rounded-lg p-2 text-gray-600 hover:bg-[#EAF4FF] hover:text-[#1565C0] transition-colors"
+              className="hidden sm:block rounded-lg p-2 text-gray-600 hover:bg-[var(--primary-light)] hover:text-[var(--primary)] transition-colors"
               aria-label="Wishlist"
             >
               <Heart className="h-5 w-5" />
@@ -138,7 +138,7 @@ export function StoreHeader({ store }: StoreHeaderProps) {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="hidden sm:block rounded-lg p-2 text-gray-600 hover:bg-[#EAF4FF] hover:text-[#1565C0] transition-colors"
+              className="hidden sm:block rounded-lg p-2 text-gray-600 hover:bg-[var(--primary-light)] hover:text-[var(--primary)] transition-colors"
               aria-label="Account"
             >
               <User className="h-5 w-5" />
@@ -147,7 +147,7 @@ export function StoreHeader({ store }: StoreHeaderProps) {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="relative rounded-lg p-2 text-gray-600 hover:bg-[#EAF4FF] hover:text-[#1565C0] transition-colors"
+                className="relative rounded-lg p-2 text-gray-600 hover:bg-[var(--primary-light)] hover:text-[var(--primary)] transition-colors"
                 aria-label="Cart"
               >
                 <ShoppingBag className="h-5 w-5" />
@@ -155,7 +155,7 @@ export function StoreHeader({ store }: StoreHeaderProps) {
                   <motion.span
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
-                    className="absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[#1565C0] text-[10px] font-bold text-white"
+                    className="absolute -right-0.5 -top-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-[var(--primary)] text-[10px] font-bold text-white"
                   >
                     {items.length}
                   </motion.span>
@@ -184,7 +184,7 @@ export function StoreHeader({ store }: StoreHeaderProps) {
               className="absolute left-0 top-0 h-full w-72 bg-white shadow-xl"
             >
               <div className="flex items-center justify-between border-b px-4 py-4">
-                <span className="font-bold text-[#1565C0]">{store.name}</span>
+                <span className="font-bold text-[var(--primary)]">{store.name}</span>
                 <button onClick={() => setMobileMenuOpen(false)}>
                   <X className="h-5 w-5" />
                 </button>
@@ -192,7 +192,7 @@ export function StoreHeader({ store }: StoreHeaderProps) {
               <div className="space-y-1 p-4">
                 <Link
                   href={`/store/${store.slug}`}
-                  className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-[#EAF4FF] hover:text-[#1565C0]"
+                  className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-[var(--primary-light)] hover:text-[var(--primary)]"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Home
@@ -201,7 +201,7 @@ export function StoreHeader({ store }: StoreHeaderProps) {
                   <Link
                     key={cat._id}
                     href={`/store/${store.slug}?category=${cat._id}`}
-                    className="block rounded-lg px-3 py-2 text-sm text-gray-600 hover:bg-[#EAF4FF] hover:text-[#1565C0]"
+                    className="block rounded-lg px-3 py-2 text-sm text-gray-600 hover:bg-[var(--primary-light)] hover:text-[var(--primary)]"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {cat.name}
@@ -209,7 +209,7 @@ export function StoreHeader({ store }: StoreHeaderProps) {
                 ))}
                 <Link
                   href={`/store/${store.slug}/cart`}
-                  className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-[#EAF4FF] hover:text-[#1565C0]"
+                  className="block rounded-lg px-3 py-2 text-sm font-medium text-gray-700 hover:bg-[var(--primary-light)] hover:text-[var(--primary)]"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Cart ({items.length})
