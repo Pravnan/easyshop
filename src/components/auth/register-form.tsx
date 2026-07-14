@@ -36,18 +36,18 @@ export function RegisterForm() {
 
   async function onSubmit(data: RegisterInput) {
     setIsLoading(true);
-    try {
-      const result = await registerStore(data);
-      toast.success("🎉 Your 15-day free trial has started!", {
-        duration: 6000,
-        position: "top-center",
-      });
-      router.push("/login");
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Registration failed");
-    } finally {
+    const result = await registerStore(data);
+    if (!result.success) {
+      toast.error(result.error || "Registration failed");
       setIsLoading(false);
+      return;
     }
+    toast.success("🎉 Your 15-day free trial has started!", {
+      duration: 6000,
+      position: "top-center",
+    });
+    router.push("/login");
+    setIsLoading(false);
   }
 
   return (

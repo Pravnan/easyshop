@@ -13,22 +13,26 @@ export async function registerStore(data: {
   storeName: string;
   storeSlug: string;
   whatsappNumber: string;
-}) {
-  await connectDB();
+}): Promise<{ success: boolean; error?: string; storeId?: string; ownerId?: string; trialEndsAt?: string }> {
+  try {
+    await connectDB();
+  } catch {
+    return { success: false, error: "Database connection failed. Please try again." };
+  }
 
   const parsed = registerSchema.safeParse(data);
   if (!parsed.success) {
-    throw new Error(parsed.error.issues[0].message);
+    return { success: false, error: parsed.error.issues[0].message };
   }
 
   const existingEmail = await User.findOne({ email: parsed.data.email.toLowerCase() });
   if (existingEmail) {
-    throw new Error("A user with this email already exists");
+    return { success: false, error: "A user with this email already exists" };
   }
 
   const existingSlug = await Store.findOne({ slug: parsed.data.storeSlug });
   if (existingSlug) {
-    throw new Error("This store slug is already taken");
+    return { success: false, error: "This store slug is already taken" };
   }
 
   const passwordHash = await bcrypt.hash(parsed.data.password, 12);
