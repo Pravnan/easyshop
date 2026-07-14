@@ -308,12 +308,11 @@ export function ProductForm({ categories, product }: ProductFormProps) {
           <CardTitle>Colors</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-wrap gap-2">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {colorFields.map((field, i) => (
               <div key={field.id} className="flex items-center gap-2">
                 <Input
                   {...register(`colors.${i}`)}
-                  className="w-32"
                   placeholder="Blue"
                 />
                 <Button
@@ -326,17 +325,18 @@ export function ProductForm({ categories, product }: ProductFormProps) {
                 </Button>
               </div>
             ))}
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    onClick={() => appendColor("" as any)}
-            >
-              <Plus className="mr-1 h-3 w-3" />
-              Add Color
-            </Button>
           </div>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="mt-3"
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            onClick={() => appendColor("" as any)}
+          >
+            <Plus className="mr-1 h-3 w-3" />
+            Add Color
+          </Button>
         </CardContent>
       </Card>
 
@@ -345,12 +345,11 @@ export function ProductForm({ categories, product }: ProductFormProps) {
           <CardTitle>Sizes</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-wrap gap-2">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {sizeFields.map((field, i) => (
               <div key={field.id} className="flex items-center gap-2">
                 <Input
                   {...register(`sizes.${i}`)}
-                  className="w-24"
                   placeholder="M"
                 />
                 <Button
@@ -363,17 +362,18 @@ export function ProductForm({ categories, product }: ProductFormProps) {
                 </Button>
               </div>
             ))}
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    onClick={() => appendSize("" as any)}
-            >
-              <Plus className="mr-1 h-3 w-3" />
-              Add Size
-            </Button>
           </div>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            className="mt-3"
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            onClick={() => appendSize("" as any)}
+          >
+            <Plus className="mr-1 h-3 w-3" />
+            Add Size
+          </Button>
         </CardContent>
       </Card>
 
@@ -384,11 +384,11 @@ export function ProductForm({ categories, product }: ProductFormProps) {
         <CardContent className="space-y-4">
           {(variantFields as Array<{ id: string; name: string; options: string[] }>).map((group, gi) => (
             <div key={group.id} className="rounded-lg border p-4">
-              <div className="mb-3 flex items-center justify-between">
+              <div className="mb-3 flex items-center gap-3">
                 <Input
                   {...register(`variantGroups.${gi}.name`)}
-                  className="w-48"
                   placeholder="e.g. Material"
+                  className="flex-1"
                 />
                 <Button
                   type="button"
@@ -399,12 +399,11 @@ export function ProductForm({ categories, product }: ProductFormProps) {
                   <X className="h-4 w-4 text-destructive" />
                 </Button>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {group.options.map((_, oi) => (
                   <div key={oi} className="flex items-center gap-2">
                     <Input
                       {...register(`variantGroups.${gi}.options.${oi}`)}
-                      className="w-32"
                       placeholder="Option"
                     />
                     <Button
@@ -421,24 +420,26 @@ export function ProductForm({ categories, product }: ProductFormProps) {
                     </Button>
                   </div>
                 ))}
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="sm"
-                  onClick={() => {
-                    const current = control._formValues.variantGroups[gi]?.options ?? [];
-                    control._formValues.variantGroups[gi].options = [...current, ""];
-                  }}
-                >
-                  <Plus className="mr-1 h-3 w-3" />
-                  Add Option
-                </Button>
               </div>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                className="mt-3"
+                onClick={() => {
+                  const current = control._formValues.variantGroups[gi]?.options ?? [];
+                  control._formValues.variantGroups[gi].options = [...current, ""];
+                }}
+              >
+                <Plus className="mr-1 h-3 w-3" />
+                Add Option
+              </Button>
             </div>
           ))}
           <Button
             type="button"
             variant="outline"
+            className="w-full"
             onClick={() => appendVariant({ name: "", options: [""] })}
           >
             <Plus className="mr-1 h-4 w-4" />
