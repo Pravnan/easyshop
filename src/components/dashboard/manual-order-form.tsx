@@ -123,7 +123,7 @@ export function ManualOrderForm() {
         <Label htmlFor="status">Status</Label>
         <select
           id="status"
-          className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+          className="flex h-8 w-full rounded-lg border border-input bg-background px-2.5 py-1 text-base transition-colors outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 md:text-sm"
           {...register("status")}
         >
           <option value="NEW">New</option>
@@ -146,7 +146,8 @@ export function ManualOrderForm() {
 
       <Button
         type="submit"
-        className="w-full bg-[#1565C0] hover:bg-[#0D47A1]"
+        className="w-full"
+        style={{ backgroundColor: "var(--primary)" }}
         disabled={isLoading}
       >
         {isLoading ? "Creating..." : "Create Order"}
