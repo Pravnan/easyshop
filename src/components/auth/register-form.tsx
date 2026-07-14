@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "next-auth/react";
 import { registerSchema } from "@/validations/schemas";
 import { registerStore } from "@/actions/public/register";
 import { Button } from "@/components/ui/button";
@@ -46,7 +47,17 @@ export function RegisterForm() {
       duration: 6000,
       position: "top-center",
     });
-    router.push("/login");
+    // Auto-login
+    const loginResult = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+    });
+    if (loginResult?.ok) {
+      router.push("/dashboard");
+    } else {
+      router.push("/login");
+    }
     setIsLoading(false);
   }
 

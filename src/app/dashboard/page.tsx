@@ -18,6 +18,7 @@ import {
   CheckCircle2,
   XCircle,
 } from "lucide-react";
+import { TrialSection } from "@/components/dashboard/trial-section";
 
 const statusColors: Record<string, string> = {
   NEW: "bg-blue-100 text-blue-800",
@@ -28,7 +29,7 @@ const statusColors: Record<string, string> = {
 };
 
 export default async function DashboardPage() {
-  await requireShopOwner();
+  const session = await requireShopOwner();
   const stats = await getDashboardStats();
 
   function formatCurrency(amount: number) {
@@ -37,6 +38,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6">
+      <TrialSection storeId={session.user.storeId!} />
       <div>
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <p className="text-muted-foreground">

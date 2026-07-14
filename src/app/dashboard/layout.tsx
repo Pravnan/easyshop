@@ -13,8 +13,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { connectDB } from "@/lib/database/mongoose";
 import { Store as StoreModel } from "@/models/Store";
-import { checkAndDisableExpiredStores, getStoreTrialInfo } from "@/actions/dashboard/trial";
-import { TrialBanner } from "@/components/dashboard/trial-banner";
+import { checkAndDisableExpiredStores } from "@/actions/dashboard/trial";
 
 export default async function DashboardLayout({
   children,
@@ -25,17 +24,10 @@ export default async function DashboardLayout({
   await connectDB();
   const store = await StoreModel.findById(session.user.storeId).lean();
 
-  // Check and disable expired trials
   await checkAndDisableExpiredStores();
-  const trialInfo = await getStoreTrialInfo(session.user.storeId!);
 
   return (
     <div className="flex min-h-screen">
-      <TrialBanner
-        trialEndsAt={trialInfo?.trialEndsAt}
-        paidAt={trialInfo?.paidAt}
-        isActive={trialInfo?.isActive ?? true}
-      />
       <aside className="hidden w-64 flex-col border-r bg-white lg:flex">
         <div className="border-b p-6">
           <Link href="/dashboard" className="text-xl font-bold text-[#1565C0]">

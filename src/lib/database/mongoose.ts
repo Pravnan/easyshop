@@ -26,35 +26,34 @@ let memoryServer: unknown = null;
 async function getMongoURI(): Promise<string> {
   const uri = getEnvURI();
   if (uri && uri !== "mongodb://localhost:27017/easyshop") {
-    console.log("[MongoDB] Using configured URI (Atlas):", uri.slice(0, uri.indexOf("@") + 1) + "***");
     return uri;
   }
 
-  // Try local MongoDB first
-  try {
-    const conn = await mongoose.createConnection("mongodb://localhost:27017/easyshop").asPromise();
-    await conn.close();
-    console.log("[MongoDB] Using local MongoDB");
+  // Local dev — try local MongoDB with short timeout, fallback to in-memory
+  const timeout = new Promise<string>((_, reject) =>
+    setTimeout(() => reject(new Error("timeout")), 2000)
+  );
+  const connectLocal = mongoose.createConnection("mongodb://localhost:27017/easyshop", {
+    serverSelectionTimeoutMS: 2000,
+  }).asPromise().then((conn) => {
+    conn.close();
     return "mongodb://localhost:27017/easyshop";
+  });
+
+  try {
+    return await Promise.race([connectLocal, timeout]);
   } catch {
-    // Local MongoDB not available, use in-memory server with disk persistence
-    console.log("[MongoDB] Local MongoDB unavailable, starting in-memory server...");
+    // In-memory fallback
     const { MongoMemoryServer } = await import("mongodb-memory-server");
     const dbPath = path.resolve(process.cwd(), ".mongodb-data");
     if (!fs.existsSync(dbPath)) {
       fs.mkdirSync(dbPath, { recursive: true });
     }
     const mongod = await MongoMemoryServer.create({
-      instance: {
-        dbName: "easyshop",
-        dbPath,
-        storageEngine: "wiredTiger",
-      },
+      instance: { dbName: "easyshop", dbPath, storageEngine: "wiredTiger" },
     });
     memoryServer = mongod;
-    const mUri = mongod.getUri();
-    console.log("[MongoDB] Using in-memory server at:", mUri);
-    return mUri;
+    return mongod.getUri();
   }
 }
 
